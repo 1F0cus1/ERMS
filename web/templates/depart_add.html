@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Focus_员工管理系统</title>
+    <title>Title</title>
     <link rel="stylesheet" href="{% static '/plugins/bootstrap-3.4.1/css/bootstrap.min.css' %}">
 
 </head>
@@ -66,44 +66,22 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-
 <div>
     <div class="container">
-        <div style="margin-bottom: 10px">
-            <a href="/depart/add/"  class="btn btn-success">
-                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                新建部门</a>
-        </div>
         <div class="panel panel-default">
-            <!-- Default panel contents -->
             <div class="panel-heading">
-                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                部门列表
+                <h3 class="panel-title">新建部门</h3>
             </div>
-
-            <!-- Table -->
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>名称</th>
-                    <th>操作</th>
-
-                </tr>
-                </thead>
-                <tbody>
-                {% for list in data %}
-                <tr>
-                    <th scope="row">{{ list.id }}</th>
-                    <td>{{ list.title }}</td>
-                    <td>
-                        <a class="btn btn-primary btn-xs" href="/depart/revise/?ntitle={{ list.title }}">编辑</a>
-                        <a class="btn btn-danger btn-xs" href="/depart/delete/?nid={{ list.id }}">删除</a>
-                    </td>
-                {% endfor %}
-                </tr>
-                </tbody>
-            </table>
+            <div class="panel-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">名称</label>
+                        <input type="text" class="form-control" name="title" placeholder="Name">
+                    </div>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
