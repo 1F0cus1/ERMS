@@ -10,7 +10,7 @@ def depart_list(request):
     #     delete = models.Department.objects.filter(id=nid).delete()
     #     return render(request,'depart_list.html')
     data = models.Department.objects.values()
-    print(data)
+    # print(data)
     return render(request,'depart_list.html', {"data":data})
 
 def depart_add(request):
@@ -29,7 +29,15 @@ def depart_delete(request):
     models.Department.objects.filter(id=nid).delete()
     return redirect('/depart/list/')
 
-def depart_revise(request):
-    nid = request.GET.get("nid")
+def depart_edit(request,nid):
+    """编辑部门"""
+    if request.method == "GET":
+        ntitle = models.Department.objects.filter(id=nid).first().title
+        return render(request,'depart_edit.html',{"title":ntitle})
+    new_title = request.POST.get("title")
+    models.Department.objects.filter(id=nid).update(title=new_title)
+    return redirect('/depart/list/')
 
-    return render(request,{"ntitle":nid})
+def user_list(request):
+    """用户列表"""
+    return render(request,'user_list.html')
