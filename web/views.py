@@ -40,4 +40,10 @@ def depart_edit(request,nid):
 
 def user_list(request):
     """用户列表"""
-    return render(request,'user_list.html')
+    data_user = models.Userinfo.objects.all()
+    for obj in data_user:
+        print(obj.id,obj.name,obj.create_time.strftime('%Y-%m-%d'),obj.depart.title,obj.get_gender_display())
+    return render(request,'user_list.html',{"data_user":data_user})
+
+def user_add(request):
+    return render(request,"user_add.html")

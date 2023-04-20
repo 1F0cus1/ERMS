@@ -1,49 +1,57 @@
 {% extends 'layout.html' %}
 {% block content %}
     <div>
-    <div class="container">
-        <div style="margin-bottom: 10px">
-            <a href="/depart/add/"  class="btn btn-success">
-                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                新建用户</a>
-        </div>
-        <div class="panel panel-default">
-            <!-- Default panel contents -->
-            <div class="panel-heading">
-                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                用户列表
+        <div class="container">
+            <div style="margin-bottom: 10px">
+                <a href="/user/add/" class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                    新建用户</a>
             </div>
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                    用户列表
+                </div>
 
-            <!-- Table -->
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>姓名</th>
-                    <th>密码</th>
-                    <th>年龄</th>
-                    <th>余额</th>
-                    <th>入职时间</th>
-                    <th>性别</th>
-                    <th>部门</th>
-                    <th>操作</th>
+                <!-- Table -->
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>姓名</th>
+                        <th>密码</th>
+                        <th>年龄</th>
+                        <th>余额</th>
+                        <th>入职时间</th>
+                        <th>性别</th>
+                        <th>部门</th>
+                        <th>操作</th>
 
-                </tr>
-                </thead>
-                <tbody>
-                {% for list in data %}
-                <tr>
-                    <th scope="row">{{ list.id }}</th>
-                    <td>{{ list.title }}</td>
-                    <td>
-                        <a class="btn btn-primary btn-xs" href="/depart/edit/{{ list.id }}/">编辑</a>
-                        <a class="btn btn-danger btn-xs" href="/depart/delete/?nid={{ list.id }}">删除</a>
-                    </td>
-                {% endfor %}
-                </tr>
-                </tbody>
-            </table>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for list in data_user %}
+                        <tr>
+                        <th scope="row">{{ list.id }}</th>
+                        <td>{{ list.name }}</td>
+                        <td>{{ list.password }}</td>
+                        <td>{{ list.age }}</td>
+                        <td>{{ list.account }}</td>
+                        {#                    重点data语法#}
+                        <td>{{ list.create_time|date:"Y-m-d" }} </td>
+                        {#                    重点data语法#}
+                        <td>{{ list.get_gender_display }}</td>
+                        <td>{{ list.depart.title }}</td>
+                        <td>
+                            <a class="btn btn-primary btn-xs" href="/depart/edit/{{ list.id }}/">编辑</a>
+                            <a class="btn btn-danger btn-xs" href="/depart/delete/?nid={{ list.id }}">删除</a>
+                        </td>
+                    {% endfor %}
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
